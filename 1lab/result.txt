@@ -1,0 +1,2 @@
+Total billing: 34690
+Took 0.004962921142578125 seconds

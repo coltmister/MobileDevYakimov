@@ -40,8 +40,10 @@ start_time = time.time()
 data = csv.DictReader(open(input_file))
 result = [check(row, msisdn_origin, in_cost, out_cost, sms_cost) for row in data]
 
-print(f'Total billing: {balance}')
-print("Took %s seconds" % (time.time() - start_time))
+with open('result.txt', 'w') as f:
+    f.write(f'Total billing: {balance}\n')
+    f.write(f"Took {time.time() - start_time} seconds")
+
 
 '''
 Тесты по скорости:
