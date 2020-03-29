@@ -10,7 +10,7 @@ first_minutes_out = 0  # Количество "первых" исходящих 
 first_minutes_in = 0  # Количество "первых" входящих минут
 in_cost = 0  # Cтоимость входящих
 out_cost = 2  # Стоимость исходящих
-sms_cost = 2  # Стоимость смс
+sms_cost = 1  # Стоимость смс
 
 
 def check(row, msisdn_origin, in_cost, out_cost, sms_cost, first_sms_cost=0, first_minutes_out_cost=0,
@@ -19,8 +19,8 @@ def check(row, msisdn_origin, in_cost, out_cost, sms_cost, first_sms_cost=0, fir
     global first_sms
     global first_minutes_out
     if msisdn_origin == row['msisdn_origin']:  # Если это исходящие звонки, то тарификация по исходящим
-        balance += (ceil(
-            float(row['call_duration'])) - first_minutes_out) * out_cost + first_minutes_out * first_minutes_out_cost
+        balance += (float(
+            row['call_duration']) - first_minutes_out) * out_cost + first_minutes_out * first_minutes_out_cost
         # Считаем сколько стоят исходящие минуты, и т.к. "первые" минуты считаются по звонку, то мы их не сбрасываем
         if first_sms != 0:  # смс сбрасываются, так что
             if first_sms < int(row['sms_number']):
@@ -31,8 +31,7 @@ def check(row, msisdn_origin, in_cost, out_cost, sms_cost, first_sms_cost=0, fir
         else:
             balance += (int(row['sms_number'])) * sms_cost
     if msisdn_origin == row['msisdn_dest']:  # Входящие звонки
-        balance += (ceil(
-            float(row['call_duration'])) - first_minutes_in) * in_cost + first_minutes_in * first_minutes_in_cost
+        balance += (float(row['call_duration']) - first_minutes_in) * in_cost + first_minutes_in * first_minutes_in_cost
     return balance
 
 
@@ -43,7 +42,6 @@ result = [check(row, msisdn_origin, in_cost, out_cost, sms_cost) for row in data
 with open('result.txt', 'w') as f:
     f.write(f'Total billing: {balance}\n')
     f.write(f"Took {time.time() - start_time} seconds")
-
 
 '''
 Тесты по скорости:
