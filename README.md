@@ -3,9 +3,9 @@
 	
 | Соцсеть | Данные |
 |: --------:|:---------:|
-| VK      | vk.com/kotkeks1       |
-| TG      | @coltadmin             |
-| Email   | colt.mister@gmail.com |
+| VK| vk.com/kotkeks1|
+| TG | @coltadmin|
+| Email| colt.mister@gmail.com|
 
 ## Лабораторная 1
 Для запуска данной программы необходим лишь Python, никаких внешних зависимостей нет.
