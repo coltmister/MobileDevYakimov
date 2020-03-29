@@ -3,14 +3,14 @@ import time
 from math import ceil
 
 balance = 0  # Итоговый счет для номера
+input_file = "data.csv"
+msisdn_origin = '933156729'
 first_sms = 10  # Количество "первых" смс, как только доходит до 0 - считается всё по основному тарифу
 first_minutes_out = 0  # Количество "первых" исходящих минут
 first_minutes_in = 0  # Количество "первых" входящих минут
-input_file = "data.csv"
-msisdn_origin = '933156729'
-in_cost = 0
-out_cost = 2
-sms_cost = 2
+in_cost = 0  # Cтоимость входящих
+out_cost = 2  # Стоимость исходящих
+sms_cost = 2  # Стоимость смс
 
 
 def check(row, msisdn_origin, in_cost, out_cost, sms_cost, first_sms_cost=0, first_minutes_out_cost=0,
@@ -42,7 +42,6 @@ result = [check(row, msisdn_origin, in_cost, out_cost, sms_cost) for row in data
 
 print(f'Total billing: {balance}')
 print("Took %s seconds" % (time.time() - start_time))
-
 
 '''
 Тесты по скорости:
